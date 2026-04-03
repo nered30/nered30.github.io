@@ -3,47 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <title>ㅇ홈페이쥐</title>
+    <style>
+        /* 원래의 투박한 스타일 유지 */
+        #rouletteArea { margin-top: 20px; display: none; }
+        canvas { border: 2px solid #000; display: block; margin: 10px 0; }
+        .menu-item { font-size: 14px; color: #333; }
+    </style>
 </head>
 <body>
     <h3>암호를 입력하면 링크가 나타납니다</h3>
     <input type="password" id="passwordInput" placeholder="암호 입력">
     <button onclick="checkPassword()">확인</button>
 
-    <!--은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보-->
     <p style="color: gray; font-size: 12px;">sql방어되있음 ㅋ</p>
 
-    <!--은성이바보은성이바보은성이바보은성이바보은성이바보은성이바보-->
+    <!-- 암호 통과 시 나타나는 구역 -->
     <div id="secretLink" style="display: none; margin-top: 20px; border: 1px solid #ccc; padding: 10px;">
         <p style="font-weight: bold; color: blue;">보안 통과! 링크가 활성화되었습니다.</p>
-        <a href="https://nered30.github.io/chess" target="_blank">이거보면 탈모 어?? 은성이 탈모다 ㅋㅋㅋㅋㅋㅋㅋㅋ</a>
-        <a href="https://nered30.github.io/randombaxe" target="_blank">랜돔 박쇄~~~~~</a>
-        <a href="https://nered30.github.io" target="_blank">이건 미완성</a>
+        
+        <!-- 원래 있던 링크들 -->
+        <a href="https://github.io" target="_blank">이거보면 탈모 어?? 은성이 탈모다 ㅋㅋㅋㅋㅋㅋㅋㅋ</a><br>
+        <a href="https://github.io" target="_blank">랜돔 박쇄~~~~~</a><br>
+        <a href="https://github.io" target="_blank">이건 미완성</a>
 
-             <p>이런 난리난 홈페이쥐는 청음 이ㄹ 거야 </p>
-     <p>뿡@뿡 </p>
-     <p>뿡@뿡 </p>
-     <p>뿡@뿡 </p>
-     <p>뿡@뿡 </p>
-     <p>뿡@뿡 </p>
-     <p>뿡@뿡 </p>
-     <p>뿡@뿡 </p>
-     <p>뿡@뿡 </p>
-     <p>뿡@뿡 </p>
-     <p>뿡@뿡 </p>
-     <p>결국 뚫은인간 매우 병맛인;;;;;;; </p>
+        <hr>
+        <!-- 추가된 룰렛 기능 (병맛 컨셉 유지) -->
+        <h4>랜덤 메뉴 룰렛 (은성이 메뉴 정해주기)</h4>
+        <input type="text" id="menuInput" placeholder="메뉴 입력">
+        <button onclick="addMenu()">칸 추가</button>
+        <button onclick="spin()" style="background-color: yellow;">돌려돌려 돌림판!!</button>
+        
+        <div style="position: relative;">
+            <div style="position: absolute; left: 140px; top: -10px; font-size: 25px; z-index: 5;">▼</div>
+            <canvas id="rouletteCanvas" width="300" height="300"></canvas>
+        </div>
+        <div id="menuListDisplay"></div>
+
+        <p>이런 난리난 홈페이쥐는 청음 이ㄹ 거야 </p>
+        <p>뿡@뿡 뿡@뿡 뿡@뿡 뿡@뿡 뿡@뿡</p>
+        <p>결국 뚫은인간 매우 병맛인;;;;;;; </p>
     </div>
 
     <script>
+        let menus = ["치킨", "피자", "탈모빔"];
+        let currentRotation = 0;
+        const canvas = document.getElementById('rouletteCanvas');
+        const ctx = canvas.getContext('2d');
+
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
-            const correctPassword = "dududu";
-
-            if (password === correctPassword) {
+            if (password === "dududu") {
                 document.getElementById('secretLink').style.display = 'block';
+                draw();
                 alert("인증 성공!");
             } else {
                 alert("응아니야");
             }
+        }
+
+        function addMenu() {
+            const val = document.getElementById('menuInput').value;
+            if(val) {
+                menus.push(val);
+                document.getElementById('menuInput').value = "";
+                draw();
+            }
+        }
+
+        function draw() {
+            const num = menus.length;
+            const arc = (Math.PI * 2) / num;
+            ctx.clearRect(0, 0, 300, 300);
+            
+            menus.forEach((m, i) => {
+                const angle = i * arc + currentRotation;
+                ctx.beginPath();
+                ctx.fillStyle = `hsl(${(i * 360) / num}, 70%, 80%)`;
+                ctx.moveTo(150, 150);
+                ctx.arc(150, 150, 140, angle, angle + arc);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(150, 150);
+                ctx.rotate(angle + arc / 2);
+                ctx.fillStyle = "#000";
+                ctx.font = "14px Arial";
+                ctx.fillText(m, 60, 5);
+                ctx.restore();
+            });
+        }
+
+        function spin() {
+            const rotateTo = Math.random() * 3600 + 2000;
+            const start = performance.now();
+            function frame(now) {
+                const p = Math.min((now - start) / 3000, 1);
+                const ease = 1 - Math.pow(1 - p, 3);
+                currentRotation = (rotateTo * ease * Math.PI) / 180;
+                draw();
+                if (p < 1) requestAnimationFrame(frame);
+                else alert("당첨 메뉴: " + menus[Math.floor(menus.length - (currentRotation % (Math.PI * 2) / (Math.PI * 2) * menus.length)) % menus.length]);
+            }
+            requestAnimationFrame(frame);
         }
     </script>
 </body>
