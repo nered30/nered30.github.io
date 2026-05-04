@@ -4,7 +4,7 @@
      - 이미지 URL 메모리 누수 (revokeObjectURL)
      - 댓글 등록 후 스크롤 위치 유지
      - 검색 후 섹션 클릭 시 검색어 초기화
-   Firebase: Firestore 실시간 구독 적용
+   Firebase: Firestore 실시간 구독 적용 
    ============================================================ */
 
 import {
