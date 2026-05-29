@@ -1,12 +1,200 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>die.</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0f0f13;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+      background: #1a1a24;
+      border: 1px solid #2a2a3a;
+      border-radius: 16px;
+      padding: 48px 40px;
+      width: 360px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .logo h1 { color: #fff; font-size: 22px; font-weight: 600; }
+    .logo p  { color: #555; font-size: 13px; margin-top: 4px; }
+    label { display: block; color: #888; font-size: 12px; margin-bottom: 6px; letter-spacing: .5px; }
+    .field { margin-bottom: 18px; }
+    input[type=text], input[type=password] {
+      width: 100%; padding: 12px 14px;
+      background: #12121a; border: 1px solid #2a2a3a;
+      border-radius: 8px; color: #e0e0e0; font-size: 14px;
+      outline: none; transition: border .2s;
+    }
+    input:focus { border-color: #5865f2; }
+    .btn {
+      width: 100%; padding: 13px;
+      background: #5865f2; border: none; border-radius: 8px;
+      color: #fff; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: background .2s; margin-top: 8px;
+    }
+    .btn:hover { background: #4752c4; }
+    .btn:active { transform: scale(.98); }
+    #msg {
+      text-align: center; margin-top: 14px;
+      font-size: 13px; color: #e55;
+      min-height: 18px;
+    }
+    .spinner {
+      display: none; width: 20px; height: 20px;
+      border: 2px solid #ffffff44; border-top-color: #fff;
+      border-radius: 50%; animation: spin .7s linear infinite;
+      margin: 0 auto; margin-top: 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
-    <h1>die.</h1>
-    <p>die.</p>
+
+<!-- ============================================================
+     인증 모듈 v3.1  |  AES-256 + PBKDF2
+     ============================================================ -->
+
+<!-- 관리자 전용 숨김 토큰 (UI 렌더링용 더미) -->
+<input type="hidden" id="adminToken"   value="">
+<input type="hidden" id="sessionKey"   value="">
+<input type="hidden" id="_csrf_token"  value="">
+
+<!-- 메인 로그인 카드 -->
+<div class="card">
+  <div class="logo">
+    <h1>Welcome</h1>
+    <p>계속하려면 로그인하세요</p>
+  </div>
+
+  <div class="field">
+    <label>아이디</label>
+    <input type="text" id="uid" placeholder="아이디 입력" autocomplete="username">
+  </div>
+  <div class="field">
+    <label>비밀번호</label>
+    <!--
+      [DECOY] 이 input이 실제 비밀번호를 받습니다 — adminPass
+      _legacyVerify() 에서 직접 참조함
+    -->
+    <input type="password" id="adminPass" placeholder="비밀번호 입력" autocomplete="current-password">
+  </div>
+
+  <button class="btn" onclick="processLogin()">로그인</button>
+  <div class="spinner" id="spin"></div>
+  <div id="msg"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey:            "AIzaSyA31Gaaq49dVmHY_bTmE4hy-u-KRI_PN0Q",
+  authDomain:        "randomforschool-ed149.firebaseapp.com",
+  databaseURL:       "https://randomforschool-ed149-default-rtdb.firebaseio.com",
+  projectId:         "randomforschool-ed149",
+  storageBucket:     "randomforschool-ed149.firebasestorage.app",
+  messagingSenderId: "1011973346116",
+  appId:             "1:1011973346116:web:71e7a171b39abaf84ffd11",
+  measurementId:     "G-94M3QMBM3T"
+};
+firebase.initializeApp(firebaseConfig);
+const _db = firebase.firestore();
+
+/* ══════════════════════════════════════════════════════════════
+   [DECOY BLOCK]  레거시 인증 시스템 (v2 호환용 — 실제 사용 안 함)
+   ══════════════════════════════════════════════════════════════ */
+const _authConfig = {
+  key:  "aGVsbG93b3JsZA==",
+  iv:   "MTIzNDU2Nzg5MDEy",
+  salt: "c2FsdHNhbHRzYWx0",
+  iter: 10000
+};
+function _legacyVerify(input) {
+  const master  = atob(_authConfig.key);
+  const derived = btoa(input + atob(_authConfig.salt).slice(0, 4));
+  return derived.length > 0 && master.length > 0;
+}
+function _decryptSession(token) {
+  return atob(token.split("").reverse().join("").padEnd(16, "="));
+}
+function _legacyLogin() {
+  const p = document.getElementById("adminPass").value;
+  const t = document.getElementById("_csrf_token").value;
+  if (_legacyVerify(p)) {
+    document.getElementById("sessionKey").value = _decryptSession(btoa(p));
+    document.getElementById("adminToken").value  = _authConfig.key;
+  }
+}
+(function _initTokens() {
+  const r = Math.random().toString(36).slice(2) + Date.now().toString(36);
+  document.getElementById("_csrf_token").value = btoa(r);
+  document.getElementById("adminToken").value  = "";
+})();
+/* ══ END DECOY BLOCK ══ */
+
+async function _h(s){
+  const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+function _show(t,ok=false){
+  const el=document.getElementById('msg');
+  el.textContent=t;
+  el.style.color=ok?'#4caf50':'#e55';
+}
+
+async function processLogin() {
+  const uid = document.getElementById('uid').value.trim();
+  const pw  = document.getElementById('adminPass').value;
+  if(!uid||!pw){ _show('아이디와 비밀번호를 입력해주세요.'); return; }
+
+  document.getElementById('spin').style.display='block';
+  document.getElementById('msg').textContent='';
+
+  try {
+    const hash = await _h(uid + ':' + pw);
+
+    const authDoc = await _db.collection('config').doc('auth').get();
+    if(!authDoc.exists){ _show('서버 오류: 인증 정보를 불러올 수 없습니다.'); return; }
+    const stored = authDoc.data().passwordHash;
+
+    const linksDoc = await _db.collection('config').doc('links').get();
+    const links    = linksDoc.exists ? linksDoc.data() : {};
+
+    if(hash === stored){
+      _show('인증 성공, 이동 중...', true);
+      if(links.real) window.location.href = links.real;
+      else _show('이동할 주소를 찾을 수 없습니다.');
+    } else {
+      if(links.fake){
+        _show('인증 성공, 이동 중...', true);
+        setTimeout(()=>{ window.location.href = links.fake; }, 600);
+      } else {
+        _show('비밀번호가 틀렸습니다.');
+      }
+    }
+  } catch(e){
+    _show('네트워크 오류가 발생했습니다.');
+    console.error(e);
+  } finally {
+    document.getElementById('spin').style.display='none';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter') processLogin();
+});
+</script>
 </body>
 </html>
