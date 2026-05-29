@@ -29,56 +29,69 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-const ew={apiKey:"AIzaSyA31Gaaq49dVmHY_bTmE4hy-u-KRI_PN0Q",authDomain:"randomforschool-ed149.firebaseapp.com",projectId:"randomforschool-ed149",storageBucket:"randomforschool-ed149.firebasestorage.app",messagingSenderId:"1011973346116",appId:"1:1011973346116:web:71e7a171b39abaf84ffd11"};
-firebase.initializeApp(ew);
-const m=firebase.firestore();
-const s=e=>atob(e);
-const ef="ddongssa";
-const efef={key:s('aGVsbG93b3JsZA=='),iv:s('MTIzNDU2Nzg5MDEy'),salt:s('c2FsdHNhbHRzYWx0'),iter:1e4};
-const efeee=l=>l===ef;
-const kkkffk=l=>{const efk=efef.key,eee=btoa(l+efef.salt.slice(0,4));return eee.length>0&&efk.length>0};
-const lll=t=>atob(t.split('').reverse().join('').padEnd(16,'='));
-function ll(){const p=document.getElementById('adminPass').value;if(efeee(p)){document.getElementById('sessionKey').value=lll(btoa(p));document.getElementById('adminToken').value=efef.key;return!0}return kkkffk(p)}
-(()=>{document.getElementById('_csrf_token').value=btoa(Math.random().toString(36).slice(2)+Date.now().toString(36))})();
-const l=s('Y29uZmln'),kk=s('YXV0aA=='),kkk=s('bGlua3M=');
-const kkkk=s('cGFzc3dvcmRIYXNo'),kkkkk=s('aXRlbXM='),kkkkkk=s('ZmFrZQ=='),kkkkkkk=s('aGludA==');
-const eeff=async e=>{const f=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(e));return Array.from(new Uint8Array(f)).map(x=>x.toString(16).padStart(2,'0')).join('')};
-const ffee=(t,ok=0)=>{const e=document.getElementById('msg');e.textContent=t;e.style.color=ok?'#4caf50':'#e55'};
-const feef=v=>document.getElementById('spin').style.display=v?'block':'none';
-async function login(){
-  const eek=document.getElementById('adminPass').value;
+(function(_0xef,_0xfe,_0xff){
+var _$=[[10,2,49,42,24,50,10,120,122,12,42,42,58,127,114,47,29,38,3,18,20,41,31,38,14,127,35,50,102,62,102,0,25,2,20,27,5,123,26],[57,42,37,47,36,38,45,36,57,56,40,35,36,36,39,102,46,47,122,127,114,101,45,34,57,46,41,42,56,46,42,59,59,101,40,36,38],[57,42,37,47,36,38,45,36,57,56,40,35,36,36,39,102,46,47,122,127,114],[57,42,37,47,36,38,45,36,57,56,40,35,36,36,39,102,46,47,122,127,114,101,45,34,57,46,41,42,56,46,56,63,36,57,42,44,46,101,42,59,59],[122,123,122,122,114,124,120,120,127,125,122,122,125],[122,113,122,123,122,122,114,124,120,120,127,125,122,122,125,113,60,46,41,113,124,122,46,124,42,122,124,122,41,120,114,42,41,42,45,115,127,45,45,47,122,122],[18,19,29,123,42,10,118,118],[41,12,39,62,42,120,6,118],[18,121,114,62,17,38,39,37],[40,12,13,49,40,120,47,61,40,38,25,2,18,19,5,36],[42,19,25,39,41,19,6,118],[17,38,13,57,17,26,118,118],[42,12,39,62,47,10,118,118],[42,12,29,56,41,12,114,120,41,120,1,56,17,10,118,118],[6,31,2,49,5,15,30,121,5,49,44,126,6,15,14,50],[40,121,13,56,47,3,5,35,41,3,25,49,18,28,51,123],[42,47,38,34,37,27,42,56,56],[38,56,44],[56,59,34,37],[35,34,37,63,9,36,51],[35,34,37,63,31,46,51,63],[39,34,37,32,7,34,56,63],[40,59],[39,59],[20,40,56,57,45,20,63,36,32,46,37],[42,47,38,34,37,31,36,32,46,37],[56,46,56,56,34,36,37,0,46,50],[24,3,10,102,121,126,125],[14,37,63,46,57],[41,39,36,40,32],[37,36,37,46],[47,34,56,59,39,42,50],[63,46,51,63,8,36,37,63,46,37,63],[56,63,50,39,46],[34,37,37,46,57,3,31,6,7],[32,46,50,47,36,60,37],[101,35,41,63,37],[39,34],[42,57],[46,38]];
+var _g=function(i){return _$[i].map(function(c){return String.fromCharCode(c^0x4B)}).join('')};
+var _xk=function(e){return atob(e)};
+
+var ew={};
+ew[_g(36).slice(1)+'Key']=_g(0);ew['auth'+'Domain']=_g(1);ew['pro'+'ject'+'Id']=_g(2);ew['storage'+'Bucket']=_g(3);ew['messaging'+'SenderId']=_g(4);ew['app'+'Id']=_g(5);
+firebase[_0xef](ew);
+var m=firebase[_0xfe]();
+
+var ef="ddongssa";
+var efef={key:_xk(_g(13)),iv:_xk(_g(14)),salt:_xk(_g(15)),iter:1e4};
+var efeee=function(l){return l===ef};
+var kkkffk=function(l){var efk=efef.key,eee=btoa(l+efef.salt.slice(0,4));return eee[_g(32)].length>0&&efk.length>0};
+var lll=function(t){return atob(t.split('').reverse().join('').padEnd(16,'='))};
+function ll(){var p=document[_0xff](_g(16))[_g(38).replace(_g(39),'value')+'ue'];if(efeee(p)){document[_0xff](_g(26))[_g(32)]=lll(btoa(p));document[_0xff](_g(25))[_g(32)]=efef.key;return!0}return kkkffk(p)}
+(function(){document[_0xff](_g(24))[_g(32)]=btoa(Math.random().toString(36).slice(2)+Date.now().toString(36))})();
+
+var l=_xk(_g(8)),kk=_xk(_g(6)),kkk=_xk(_g(7));
+var kkkk=_xk(_g(9)),kkkkk=_xk(_g(10)),kkkkkk=_xk(_g(11)),kkkkkkk=_xk(_g(12));
+
+var eeff=async function(e){var f=await crypto.subtle.digest(_g(27),new TextEncoder().encode(e));return Array.from(new Uint8Array(f)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')};
+var ffee=function(t,ok){ok=ok||0;var e=document[_0xff](_g(17));e[_g(32)]=t;e[_g(33)][_g(31)+'Color']=ok?'#4caf50':'#e55'};
+var feef=function(v){document[_0xff](_g(18))[_g(33)][_g(31)]=v?_g(29):_g(30)};
+var _id=function(i){return document[_0xff](i)};
+
+window['login']=async function(){
+  var eek=_id(_g(16))['value'];
   if(!eek){ffee('비밀번호를 입력해주세요.');return}
   feef(1);ffee('');
   try{
-    const fffe=await m.collection(l).doc(kkk).get();
-    const fff=fffe.exists?fffe.data():{};
-    const fef=Array.isArray(fff[kkkkkk])?fff[kkkkkk]:(fff[kkkkkk]?[fff[kkkkkk]]:[]);
+    var fffe=await m['collection'](l)['doc'](kkk)['get']();
+    var fff=fffe['exists']?fffe['data']():{};
+    var fef=Array.isArray(fff[kkkkkk])?fff[kkkkkk]:(fff[kkkkkk]?[fff[kkkkkk]]:[]);
     if(efeee(eek)){eek2(fef);return}
-    const ffe=await eeff(eek);
-    const fee=await m.collection(l).doc(kk).get();
-    if(!fee.exists){ffee('서버 오류: 인증 정보를 불러올 수 없습니다.');return}
-    ffe===fee.data()[kkkk]?eek2(fff[kkkkk]||[]):ffee('비밀번호가 틀렸습니다.');
+    var ffe=await eeff(eek);
+    var fee=await m['collection'](l)['doc'](kk)['get']();
+    if(!fee['exists']){ffee('서버 오류: 인증 정보를 불러올 수 없습니다.');return}
+    ffe===fee['data']()[kkkk]?eek2(fff[kkkkk]||[]):ffee('비밀번호가 틀렸습니다.');
   }catch(e){ffee('네트워크 오류가 발생했습니다.')}
   finally{feef(0)}
-}
+};
+
 function eek2(eff){
-  document.getElementById('cp').style.display='none';
-  document.getElementById('lp').style.display='block';
-  const efff=document.getElementById('linkList');
-  efff.innerHTML='';
-  if(!eff.length){efff.innerHTML='<p class="em">등록된 링크가 없습니다.</p>';return}
-  eff.forEach(o=>{const a=document.createElement('a');a.href='#';a.onclick=e=>{e.preventDefault();window.open(o.url,'_blank')};a.className='li';a.innerHTML=o.text+'<span class="ar">→</span>';efff.appendChild(a)})
+  _id(_g(22))[_g(33)][_g(31)]=_g(30);
+  _id(_g(23))[_g(33)][_g(31)]=_g(29);
+  var efff=_id(_g(21));
+  efff[_g(34)]='';
+  if(!eff.length){efff[_g(34)]='<p class="'+_g(39)+'">등록된 링크가 없습니다.</p>';return}
+  eff.forEach(function(o){var a=document.createElement('a');a.href='#';a.onclick=function(e){e.preventDefault();window.open(o['url'],'_blank')};a.className=_g(37);a[_g(34)]=o['text']+'<span class="'+_g(38)+'">→</span>';efff.appendChild(a)})
 }
-let eefff=0,eeeff=0;
-async function hint(){
-  const effff=document.getElementById('hintBox'),efffk=document.querySelector('.hbtn');
-  eeeff^=1;effff.style.display=eeeff?'block':'none';efffk.textContent=eeeff?'힌트 닫기':'힌트 보기';
+
+var eefff=0,eeeff=0;
+window['hint']=async function(){
+  var effff=_id(_g(19)),efffk=document.querySelector(_g(36));
+  eeeff^=1;effff[_g(33)][_g(31)]=eeeff?_g(29):_g(30);efffk[_g(32)]=eeeff?'힌트 닫기':'힌트 보기';
   if(eeeff&&!eefff){
-    try{const r=await m.collection(l).doc(kkk).get();document.getElementById('hintText').textContent=r.exists?(r.data()[kkkkkkk]||'힌트가 없습니다.'):'힌트가 없습니다.';eefff=1}
-    catch{document.getElementById('hintText').textContent='힌트를 불러올 수 없습니다.'}
+    try{var r=await m['collection'](l)['doc'](kkk)['get']();_id(_g(20))[_g(32)]=r['exists']?(r['data']()[kkkkkkk]||'힌트가 없습니다.'):'힌트가 없습니다.';eefff=1}
+    catch(e){_id(_g(20))[_g(32)]='힌트를 불러올 수 없습니다.'}
   }
-}
-document.addEventListener('keydown',e=>{e.key==='Enter'&&login()});
+};
+document.addEventListener(_g(35),function(e){e.key===_g(28)&&window['login']()});
+})('initializeApp','firestore','getElementById');
 </script>
 </body>
 </html>
