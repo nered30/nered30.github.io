@@ -67,7 +67,7 @@ function eek2(eff){
   const efff=document.getElementById('linkList');
   efff.innerHTML='';
   if(!eff.length){efff.innerHTML='<p class="em">등록된 링크가 없습니다.</p>';return}
-  eff.forEach(o=>{const a=document.createElement('a');a.href=o.url;a.target='_blank';a.className='li';a.innerHTML=o.text+'<span class="ar">→</span>';efff.appendChild(a)})
+  eff.forEach(o=>{const a=document.createElement('a');a.href='#';a.onclick=e=>{e.preventDefault();window.open(o.url,'_blank')};a.className='li';a.innerHTML=o.text+'<span class="ar">→</span>';efff.appendChild(a)})
 }
 let eefff=0,eeeff=0;
 async function hint(){
