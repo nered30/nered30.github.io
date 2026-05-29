@@ -1,55 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{background:#0f0f13;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Segoe UI',sans-serif}
-    .card{background:#1a1a24;border:1px solid #2a2a3a;border-radius:16px;padding:48px 40px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-    .logo{text-align:center;margin-bottom:32px}
-    .logo h1{color:#fff;font-size:22px;font-weight:600}
-    .logo p{color:#555;font-size:13px;margin-top:4px}
-    label{display:block;color:#888;font-size:12px;margin-bottom:6px}
-    .field{margin-bottom:18px}
-    input[type=password]{width:100%;padding:12px 14px;background:#12121a;border:1px solid #2a2a3a;border-radius:8px;color:#e0e0e0;font-size:14px;outline:none;transition:border .2s}
-    input:focus{border-color:#5865f2}
-    .hbtn{background:none;border:none;color:#5865f2;font-size:12px;cursor:pointer;padding:0;margin-top:6px;text-decoration:underline}
-    .hbtn:hover{color:#7983f5}
-    .hbox{display:none;background:#12121a;border:1px solid #2a2a3a;border-radius:7px;padding:10px 14px;margin-top:10px;font-size:13px;color:#aaa;line-height:1.5}
-    .btn{width:100%;padding:13px;background:#5865f2;border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:18px}
-    .btn:hover{background:#4752c4}
-    .btn:active{transform:scale(.98)}
-    #msg{text-align:center;margin-top:14px;font-size:13px;color:#e55;min-height:18px}
-    .sp{display:none;width:20px;height:20px;border:2px solid #ffffff44;border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:12px auto 0}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    #lp{display:none}
-    #lp .logo{margin-bottom:24px}
-    .ll{display:flex;flex-direction:column;gap:10px}
-    .li{display:block;padding:14px 18px;background:#16213e;border:1px solid #3a4a7a;border-radius:4px;color:#c8d3f5;font-size:14px;text-decoration:none;transition:border .2s,background .2s,color .2s}
-    .li:hover{border-color:#5865f2;background:#1e2d5a;color:#fff}
-    .li .ar{float:right;color:#7983f5}
-    .em{color:#555;font-size:13px;text-align:center;margin-top:10px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f13;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Segoe UI',sans-serif}.card{background:#1a1a24;border:1px solid #2a2a3a;border-radius:16px;padding:48px 40px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.5)}.logo{text-align:center;margin-bottom:32px}.logo h1{color:#fff;font-size:22px;font-weight:600}label{display:block;color:#888;font-size:12px;margin-bottom:6px}.field{margin-bottom:18px}input[type=password]{width:100%;padding:12px 14px;background:#12121a;border:1px solid #2a2a3a;border-radius:8px;color:#e0e0e0;font-size:14px;outline:none;transition:border .2s}input:focus{border-color:#5865f2}.hbtn{background:none;border:none;color:#5865f2;font-size:12px;cursor:pointer;padding:0;margin-top:6px;text-decoration:underline}.hbtn:hover{color:#7983f5}.hbox{display:none;background:#12121a;border:1px solid #2a2a3a;border-radius:7px;padding:10px 14px;margin-top:10px;font-size:13px;color:#aaa;line-height:1.5}.btn{width:100%;padding:13px;background:#5865f2;border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:18px}.btn:hover{background:#4752c4}.btn:active{transform:scale(.98)}#msg{text-align:center;margin-top:14px;font-size:13px;color:#e55;min-height:18px}.sp{display:none;width:20px;height:20px;border:2px solid #ffffff44;border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:12px auto 0}@keyframes spin{to{transform:rotate(360deg)}}#lp{display:none}#lp .logo{margin-bottom:24px}.ll{display:flex;flex-direction:column;gap:10px}.li{display:block;padding:14px 18px;background:#16213e;border:1px solid #3a4a7a;border-radius:4px;color:#c8d3f5;font-size:14px;text-decoration:none;transition:border .2s,background .2s,color .2s}.li:hover{border-color:#5865f2;background:#1e2d5a;color:#fff}.li .ar{float:right;color:#7983f5}.em{color:#555;font-size:13px;text-align:center;margin-top:10px}
+</style>
 </head>
 <body>
-
-<!-- ============================================================
-     인증 모듈 v3.1  |  AES-256 + PBKDF2
-     ============================================================ -->
-<input type="hidden" id="adminToken" value="">
-<input type="hidden" id="sessionKey" value="">
-<input type="hidden" id="_csrf_token" value="">
-
+<input type="hidden" id="adminToken" value=""><input type="hidden" id="sessionKey" value=""><input type="hidden" id="_csrf_token" value="">
 <div class="card" id="cp">
   <div class="logo"><h1>Welcome</h1></div>
   <div class="field">
     <label>비밀번호</label>
-    <!--
-      [DECOY] 실제 비밀번호 입력 필드 — adminPass
-      _legacyVerify() 에서 직접 참조함
-    -->
     <input type="password" id="adminPass" placeholder="비밀번호 입력" autocomplete="current-password">
   </div>
   <button class="hbtn" onclick="hint()">힌트 보기</button>
@@ -58,80 +22,63 @@
   <div class="sp" id="spin"></div>
   <div id="msg"></div>
 </div>
-
 <div class="card" id="lp">
   <div class="logo"><h1>링크 목록</h1></div>
   <div class="ll" id="linkList"></div>
 </div>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-const fc={apiKey:"AIzaSyA31Gaaq49dVmHY_bTmE4hy-u-KRI_PN0Q",authDomain:"randomforschool-ed149.firebaseapp.com",projectId:"randomforschool-ed149",storageBucket:"randomforschool-ed149.firebasestorage.app",messagingSenderId:"1011973346116",appId:"1:1011973346116:web:71e7a171b39abaf84ffd11"};
-firebase.initializeApp(fc);
-const db=firebase.firestore();
-
-/* ══════════════════════════════════════════════════════════════
-   인증 설정  |  비밀번호 검증 모듈
-   ══════════════════════════════════════════════════════════════ */
-
-// 마스터 비밀번호 (평문 저장 — 보안 레이어 1)
-const password="ddongssa";
-
-const ac={key:"aGVsbG93b3JsZA==",iv:"MTIzNDU2Nzg5MDEy",salt:"c2FsdHNhbHRzYWx0",iter:10000};
-
-// 1차 비밀번호 검증 (평문 비교)
-function pv(i){return i===password}
-function lv(i){const m=atob(ac.key),d=btoa(i+atob(ac.salt).slice(0,4));return d.length>0&&m.length>0}
-function ds(t){return atob(t.split("").reverse().join("").padEnd(16,"="))}
-function ll(){const p=document.getElementById("adminPass").value;if(pv(p)){document.getElementById("sessionKey").value=ds(btoa(p));document.getElementById("adminToken").value=ac.key;return true}return lv(p)}
-(function(){const r=Math.random().toString(36).slice(2)+Date.now().toString(36);document.getElementById("_csrf_token").value=btoa(r)})();
-/* ══ END AUTH CONFIG ══ */
-
-async function h(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
-function msg(t,ok=false){const el=document.getElementById('msg');el.textContent=t;el.style.color=ok?'#4caf50':'#e55'}
-
+const ew={apiKey:"AIzaSyA31Gaaq49dVmHY_bTmE4hy-u-KRI_PN0Q",authDomain:"randomforschool-ed149.firebaseapp.com",projectId:"randomforschool-ed149",storageBucket:"randomforschool-ed149.firebasestorage.app",messagingSenderId:"1011973346116",appId:"1:1011973346116:web:71e7a171b39abaf84ffd11"};
+firebase.initializeApp(ew);
+const m=firebase.firestore();
+const s=e=>atob(e);
+const ef="ddongssa";
+const efef={key:s('aGVsbG93b3JsZA=='),iv:s('MTIzNDU2Nzg5MDEy'),salt:s('c2FsdHNhbHRzYWx0'),iter:1e4};
+const efeee=l=>l===ef;
+const kkkffk=l=>{const efk=efef.key,eee=btoa(l+efef.salt.slice(0,4));return eee.length>0&&efk.length>0};
+const lll=t=>atob(t.split('').reverse().join('').padEnd(16,'='));
+function ll(){const p=document.getElementById('adminPass').value;if(efeee(p)){document.getElementById('sessionKey').value=lll(btoa(p));document.getElementById('adminToken').value=efef.key;return!0}return kkkffk(p)}
+(()=>{document.getElementById('_csrf_token').value=btoa(Math.random().toString(36).slice(2)+Date.now().toString(36))})();
+const l=s('Y29uZmln'),kk=s('YXV0aA=='),kkk=s('bGlua3M=');
+const kkkk=s('cGFzc3dvcmRIYXNo'),kkkkk=s('aXRlbXM='),kkkkkk=s('ZmFrZQ=='),kkkkkkk=s('aGludA==');
+const eeff=async e=>{const f=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(e));return Array.from(new Uint8Array(f)).map(x=>x.toString(16).padStart(2,'0')).join('')};
+const ffee=(t,ok=0)=>{const e=document.getElementById('msg');e.textContent=t;e.style.color=ok?'#4caf50':'#e55'};
+const feef=v=>document.getElementById('spin').style.display=v?'block':'none';
 async function login(){
-  const pw=document.getElementById('adminPass').value;
-  if(!pw){msg('비밀번호를 입력해주세요.');return}
-  document.getElementById('spin').style.display='block';
-  document.getElementById('msg').textContent='';
+  const eek=document.getElementById('adminPass').value;
+  if(!eek){ffee('비밀번호를 입력해주세요.');return}
+  feef(1);ffee('');
   try{
-    const ld=await db.collection('config').doc('links').get();
-    const d=ld.exists?ld.data():{};
-    const fi=Array.isArray(d.fake)?d.fake:(d.fake?[d.fake]:[]);
-    if(pv(pw)){showLinks(fi);return}
-    const hv=await h(pw);
-    const ad=await db.collection('config').doc('auth').get();
-    if(!ad.exists){msg('서버 오류: 인증 정보를 불러올 수 없습니다.');return}
-    if(hv===ad.data().passwordHash)showLinks(d.items||[]);
-    else msg('비밀번호가 틀렸습니다.');
-  }catch(e){msg('네트워크 오류가 발생했습니다.')}
-  finally{document.getElementById('spin').style.display='none'}
+    const fffe=await m.collection(l).doc(kkk).get();
+    const fff=fffe.exists?fffe.data():{};
+    const fef=Array.isArray(fff[kkkkkk])?fff[kkkkkk]:(fff[kkkkkk]?[fff[kkkkkk]]:[]);
+    if(efeee(eek)){eek2(fef);return}
+    const ffe=await eeff(eek);
+    const fee=await m.collection(l).doc(kk).get();
+    if(!fee.exists){ffee('서버 오류: 인증 정보를 불러올 수 없습니다.');return}
+    ffe===fee.data()[kkkk]?eek2(fff[kkkkk]||[]):ffee('비밀번호가 틀렸습니다.');
+  }catch(e){ffee('네트워크 오류가 발생했습니다.')}
+  finally{feef(0)}
 }
-
-function showLinks(items){
+function eek2(eff){
   document.getElementById('cp').style.display='none';
   document.getElementById('lp').style.display='block';
-  const list=document.getElementById('linkList');
-  list.innerHTML='';
-  if(!items.length){list.innerHTML='<p class="em">등록된 링크가 없습니다.</p>';return}
-  items.forEach(item=>{const a=document.createElement('a');a.href=item.url;a.target='_blank';a.className='li';a.innerHTML=item.text+'<span class="ar">→</span>';list.appendChild(a)})
+  const efff=document.getElementById('linkList');
+  efff.innerHTML='';
+  if(!eff.length){efff.innerHTML='<p class="em">등록된 링크가 없습니다.</p>';return}
+  eff.forEach(o=>{const a=document.createElement('a');a.href=o.url;a.target='_blank';a.className='li';a.innerHTML=o.text+'<span class="ar">→</span>';efff.appendChild(a)})
 }
-
-let hl=false,hv=false;
+let eefff=0,eeeff=0;
 async function hint(){
-  const box=document.getElementById('hintBox'),btn=document.querySelector('.hbtn');
-  hv=!hv;
-  box.style.display=hv?'block':'none';
-  btn.textContent=hv?'힌트 닫기':'힌트 보기';
-  if(hv&&!hl){
-    try{const doc=await db.collection('config').doc('links').get();document.getElementById('hintText').textContent=doc.exists?(doc.data().hint||'힌트가 없습니다.'):'힌트가 없습니다.';hl=true}
-    catch(e){document.getElementById('hintText').textContent='힌트를 불러올 수 없습니다.'}
+  const effff=document.getElementById('hintBox'),efffk=document.querySelector('.hbtn');
+  eeeff^=1;effff.style.display=eeeff?'block':'none';efffk.textContent=eeeff?'힌트 닫기':'힌트 보기';
+  if(eeeff&&!eefff){
+    try{const r=await m.collection(l).doc(kkk).get();document.getElementById('hintText').textContent=r.exists?(r.data()[kkkkkkk]||'힌트가 없습니다.'):'힌트가 없습니다.';eefff=1}
+    catch{document.getElementById('hintText').textContent='힌트를 불러올 수 없습니다.'}
   }
 }
-
-document.addEventListener('keydown',e=>{if(e.key==='Enter')login()});
+document.addEventListener('keydown',e=>{e.key==='Enter'&&login()});
 </script>
 </body>
 </html>
