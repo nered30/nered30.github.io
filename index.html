@@ -5,76 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0f0f13;
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .card {
-      background: #1a1a24; border: 1px solid #2a2a3a;
-      border-radius: 16px; padding: 48px 40px; width: 360px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-    .logo { text-align: center; margin-bottom: 32px; }
-    .logo h1 { color: #fff; font-size: 22px; font-weight: 600; }
-    .logo p  { color: #555; font-size: 13px; margin-top: 4px; }
-    label { display: block; color: #888; font-size: 12px; margin-bottom: 6px; }
-    .field { margin-bottom: 18px; }
-    input[type=password] {
-      width: 100%; padding: 12px 14px;
-      background: #12121a; border: 1px solid #2a2a3a;
-      border-radius: 8px; color: #e0e0e0; font-size: 14px;
-      outline: none; transition: border .2s;
-    }
-    input:focus { border-color: #5865f2; }
-    .hint-btn {
-      background: none; border: none; color: #5865f2;
-      font-size: 12px; cursor: pointer; padding: 0;
-      margin-top: 6px; text-decoration: underline;
-    }
-    .hint-btn:hover { color: #7983f5; }
-    .hint-box {
-      display: none; background: #12121a; border: 1px solid #2a2a3a;
-      border-radius: 7px; padding: 10px 14px; margin-top: 10px;
-      font-size: 13px; color: #aaa; line-height: 1.5;
-    }
-    .btn {
-      width: 100%; padding: 13px;
-      background: #5865f2; border: none; border-radius: 8px;
-      color: #fff; font-size: 15px; font-weight: 600;
-      cursor: pointer; transition: background .2s; margin-top: 18px;
-    }
-    .btn:hover { background: #4752c4; }
-    .btn:active { transform: scale(.98); }
-    #msg {
-      text-align: center; margin-top: 14px;
-      font-size: 13px; color: #e55; min-height: 18px;
-    }
-    .spinner {
-      display: none; width: 20px; height: 20px;
-      border: 2px solid #ffffff44; border-top-color: #fff;
-      border-radius: 50%; animation: spin .7s linear infinite;
-      margin: 0 auto; margin-top: 12px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── 링크 목록 페이지 ── */
-    #linksPage { display: none; }
-    #linksPage .logo { margin-bottom: 24px; }
-    .link-list { display: flex; flex-direction: column; gap: 10px; }
-    .link-item {
-      display: block; padding: 14px 18px;
-      background: #12121a; border: 1px solid #2a2a3a;
-      border-radius: 10px; color: #e0e0e0; font-size: 14px;
-      text-decoration: none; transition: border .2s, background .2s;
-    }
-    .link-item:hover {
-      border-color: #5865f2; background: #1e1e2e; color: #fff;
-    }
-    .link-item .arrow { float: right; color: #5865f2; }
-    .empty-msg { color: #555; font-size: 13px; text-align: center; margin-top: 10px; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#0f0f13;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Segoe UI',sans-serif}
+    .card{background:#1a1a24;border:1px solid #2a2a3a;border-radius:16px;padding:48px 40px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+    .logo{text-align:center;margin-bottom:32px}
+    .logo h1{color:#fff;font-size:22px;font-weight:600}
+    .logo p{color:#555;font-size:13px;margin-top:4px}
+    label{display:block;color:#888;font-size:12px;margin-bottom:6px}
+    .field{margin-bottom:18px}
+    input[type=password]{width:100%;padding:12px 14px;background:#12121a;border:1px solid #2a2a3a;border-radius:8px;color:#e0e0e0;font-size:14px;outline:none;transition:border .2s}
+    input:focus{border-color:#5865f2}
+    .hbtn{background:none;border:none;color:#5865f2;font-size:12px;cursor:pointer;padding:0;margin-top:6px;text-decoration:underline}
+    .hbtn:hover{color:#7983f5}
+    .hbox{display:none;background:#12121a;border:1px solid #2a2a3a;border-radius:7px;padding:10px 14px;margin-top:10px;font-size:13px;color:#aaa;line-height:1.5}
+    .btn{width:100%;padding:13px;background:#5865f2;border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:18px}
+    .btn:hover{background:#4752c4}
+    .btn:active{transform:scale(.98)}
+    #msg{text-align:center;margin-top:14px;font-size:13px;color:#e55;min-height:18px}
+    .sp{display:none;width:20px;height:20px;border:2px solid #ffffff44;border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:12px auto 0}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    #lp{display:none}
+    #lp .logo{margin-bottom:24px}
+    .ll{display:flex;flex-direction:column;gap:10px}
+    .li{display:block;padding:14px 18px;background:#12121a;border:1px solid #2a2a3a;border-radius:10px;color:#e0e0e0;font-size:14px;text-decoration:none;transition:border .2s,background .2s}
+    .li:hover{border-color:#5865f2;background:#1e1e2e;color:#fff}
+    .li .ar{float:right;color:#5865f2}
+    .em{color:#555;font-size:13px;text-align:center;margin-top:10px}
   </style>
 </head>
 <body>
@@ -82,17 +38,12 @@
 <!-- ============================================================
      인증 모듈 v3.1  |  AES-256 + PBKDF2
      ============================================================ -->
-<input type="hidden" id="adminToken"  value="">
-<input type="hidden" id="sessionKey"  value="">
+<input type="hidden" id="adminToken" value="">
+<input type="hidden" id="sessionKey" value="">
 <input type="hidden" id="_csrf_token" value="">
 
-<!-- ── 로그인 카드 ── -->
-<div class="card" id="loginPage">
-  <div class="logo">
-    <h1>Welcome</h1>
-    <p>계속하려면 로그인하세요</p>
-  </div>
-
+<div class="card" id="cp">
+  <div class="logo"><h1>Welcome</h1><p>계속하려면 로그인하세요</p></div>
   <div class="field">
     <label>비밀번호</label>
     <!--
@@ -101,183 +52,86 @@
     -->
     <input type="password" id="adminPass" placeholder="비밀번호 입력" autocomplete="current-password">
   </div>
-
-  <button class="hint-btn" onclick="toggleHint()">💡 힌트 보기</button>
-  <div class="hint-box" id="hintBox">
-    <span id="hintText">불러오는 중...</span>
-  </div>
-
-  <button class="btn" onclick="processLogin()">로그인</button>
-  <div class="spinner" id="spin"></div>
+  <button class="hbtn" onclick="hint()">💡 힌트 보기</button>
+  <div class="hbox" id="hintBox"><span id="hintText">불러오는 중...</span></div>
+  <button class="btn" onclick="login()">로그인</button>
+  <div class="sp" id="spin"></div>
   <div id="msg"></div>
 </div>
 
-<!-- ── 링크 목록 카드 (로그인 성공 후 표시) ── -->
-<div class="card" id="linksPage">
-  <div class="logo">
-    <h1>🔗 링크 목록</h1>
-    <p>아래 링크를 클릭하세요</p>
-  </div>
-  <div class="link-list" id="linkList"></div>
+<div class="card" id="lp">
+  <div class="logo"><h1>🔗 링크 목록</h1><p>아래 링크를 클릭하세요</p></div>
+  <div class="ll" id="linkList"></div>
 </div>
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 <script>
-/* ── Firebase 설정 ── */
-const firebaseConfig = {
-  apiKey:            "AIzaSyA31Gaaq49dVmHY_bTmE4hy-u-KRI_PN0Q",
-  authDomain:        "randomforschool-ed149.firebaseapp.com",
-  projectId:         "randomforschool-ed149",
-  storageBucket:     "randomforschool-ed149.firebasestorage.app",
-  messagingSenderId: "1011973346116",
-  appId:             "1:1011973346116:web:71e7a171b39abaf84ffd11"
-};
-firebase.initializeApp(firebaseConfig);
-const _db = firebase.firestore();
+const fc={apiKey:"AIzaSyA31Gaaq49dVmHY_bTmE4hy-u-KRI_PN0Q",authDomain:"randomforschool-ed149.firebaseapp.com",projectId:"randomforschool-ed149",storageBucket:"randomforschool-ed149.firebasestorage.app",messagingSenderId:"1011973346116",appId:"1:1011973346116:web:71e7a171b39abaf84ffd11"};
+firebase.initializeApp(fc);
+const db=firebase.firestore();
 
 /* ══════════════════════════════════════════════════════════════
    인증 설정  |  비밀번호 검증 모듈
    ══════════════════════════════════════════════════════════════ */
 
 // 마스터 비밀번호 (평문 저장 — 보안 레이어 1)
-const password = "ddongssa";
+const password="ddongssa";
 
-const _authConfig = {
-  key:  "aGVsbG93b3JsZA==",
-  iv:   "MTIzNDU2Nzg5MDEy",
-  salt: "c2FsdHNhbHRzYWx0",
-  iter: 10000
-};
+const ac={key:"aGVsbG93b3JsZA==",iv:"MTIzNDU2Nzg5MDEy",salt:"c2FsdHNhbHRzYWx0",iter:10000};
 
 // 1차 비밀번호 검증 (평문 비교)
-function _primaryVerify(input) {
-  return input === password;
-}
-
-function _legacyVerify(input) {
-  const master  = atob(_authConfig.key);
-  const derived = btoa(input + atob(_authConfig.salt).slice(0, 4));
-  return derived.length > 0 && master.length > 0;
-}
-function _decryptSession(token) {
-  return atob(token.split("").reverse().join("").padEnd(16, "="));
-}
-
-// 로그인 처리 — 1차 검증 후 세션 발급
-function _legacyLogin() {
-  const p = document.getElementById("adminPass").value;
-  if (_primaryVerify(p)) {
-    document.getElementById("sessionKey").value = _decryptSession(btoa(p));
-    document.getElementById("adminToken").value  = _authConfig.key;
-    return true;
-  }
-  return _legacyVerify(p);
-}
-(function _initTokens() {
-  const r = Math.random().toString(36).slice(2) + Date.now().toString(36);
-  document.getElementById("_csrf_token").value = btoa(r);
-})();
+function pv(i){return i===password}
+function lv(i){const m=atob(ac.key),d=btoa(i+atob(ac.salt).slice(0,4));return d.length>0&&m.length>0}
+function ds(t){return atob(t.split("").reverse().join("").padEnd(16,"="))}
+function ll(){const p=document.getElementById("adminPass").value;if(pv(p)){document.getElementById("sessionKey").value=ds(btoa(p));document.getElementById("adminToken").value=ac.key;return true}return lv(p)}
+(function(){const r=Math.random().toString(36).slice(2)+Date.now().toString(36);document.getElementById("_csrf_token").value=btoa(r)})();
 /* ══ END AUTH CONFIG ══ */
 
+async function h(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+function msg(t,ok=false){const el=document.getElementById('msg');el.textContent=t;el.style.color=ok?'#4caf50':'#e55'}
 
-/* ── 실제 인증 로직 ── */
-async function _h(s) {
-  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-  return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2,'0')).join('');
+async function login(){
+  const pw=document.getElementById('adminPass').value;
+  if(!pw){msg('비밀번호를 입력해주세요.');return}
+  document.getElementById('spin').style.display='block';
+  document.getElementById('msg').textContent='';
+  try{
+    const ld=await db.collection('config').doc('links').get();
+    const d=ld.exists?ld.data():{};
+    const fi=Array.isArray(d.fake)?d.fake:(d.fake?[d.fake]:[]);
+    if(pv(pw)){showLinks(fi);return}
+    const hv=await h(pw);
+    const ad=await db.collection('config').doc('auth').get();
+    if(!ad.exists){msg('서버 오류: 인증 정보를 불러올 수 없습니다.');return}
+    if(hv===ad.data().passwordHash)showLinks(d.items||[]);
+    else msg('비밀번호가 틀렸습니다.');
+  }catch(e){msg('네트워크 오류가 발생했습니다.')}
+  finally{document.getElementById('spin').style.display='none'}
 }
-function _show(t, ok=false) {
-  const el = document.getElementById('msg');
-  el.textContent = t;
-  el.style.color = ok ? '#4caf50' : '#e55';
+
+function showLinks(items){
+  document.getElementById('cp').style.display='none';
+  document.getElementById('lp').style.display='block';
+  const list=document.getElementById('linkList');
+  list.innerHTML='';
+  if(!items.length){list.innerHTML='<p class="em">등록된 링크가 없습니다.</p>';return}
+  items.forEach(item=>{const a=document.createElement('a');a.href=item.url;a.target='_blank';a.className='li';a.innerHTML=item.text+'<span class="ar">→</span>';list.appendChild(a)})
 }
 
-async function processLogin() {
-  const pw = document.getElementById('adminPass').value;
-  if(!pw) { _show('비밀번호를 입력해주세요.'); return; }
-
-  document.getElementById('spin').style.display = 'block';
-  document.getElementById('msg').textContent = '';
-
-  try {
-    const linksDoc  = await _db.collection('config').doc('links').get();
-    const data      = linksDoc.exists ? linksDoc.data() : {};
-    const fakeItems = Array.isArray(data.fake) ? data.fake : (data.fake ? [data.fake] : []);
-
-    // ── 1차 인증 (가짜) ──
-    if(_primaryVerify(pw)) {
-      showLinksPage(fakeItems);
-      return;
-    }
-
-    // ── 2차 인증 (진짜, Firebase) ──
-    const hash    = await _h(pw);
-    const authDoc = await _db.collection('config').doc('auth').get();
-    if(!authDoc.exists) { _show('서버 오류: 인증 정보를 불러올 수 없습니다.'); return; }
-
-    if(hash === authDoc.data().passwordHash) {
-      showLinksPage(data.items || []);
-    } else {
-      _show('비밀번호가 틀렸습니다.');
-    }
-  } catch(e) {
-    _show('네트워크 오류가 발생했습니다.');
-    console.error(e);
-  } finally {
-    document.getElementById('spin').style.display = 'none';
+let hl=false,hv=false;
+async function hint(){
+  const box=document.getElementById('hintBox'),btn=document.querySelector('.hbtn');
+  hv=!hv;
+  box.style.display=hv?'block':'none';
+  btn.textContent=hv?'💡 힌트 닫기':'💡 힌트 보기';
+  if(hv&&!hl){
+    try{const doc=await db.collection('config').doc('links').get();document.getElementById('hintText').textContent=doc.exists?(doc.data().hint||'힌트가 없습니다.'):'힌트가 없습니다.';hl=true}
+    catch(e){document.getElementById('hintText').textContent='힌트를 불러올 수 없습니다.'}
   }
 }
 
-function showLinksPage(items) {
-  document.getElementById('loginPage').style.display = 'none';
-  document.getElementById('linksPage').style.display = 'block';
-
-  const list = document.getElementById('linkList');
-  list.innerHTML = '';
-
-  if(!items.length) {
-    list.innerHTML = '<p class="empty-msg">등록된 링크가 없습니다.</p>';
-    return;
-  }
-
-  items.forEach(item => {
-    const a = document.createElement('a');
-    a.href        = item.url;
-    a.target      = '_blank';
-    a.className   = 'link-item';
-    a.innerHTML   = item.text + '<span class="arrow">→</span>';
-    list.appendChild(a);
-  });
-}
-
-/* ── 힌트 토글 ── */
-let _hintLoaded  = false;
-let _hintVisible = false;
-
-async function toggleHint() {
-  const box = document.getElementById('hintBox');
-  const btn = document.querySelector('.hint-btn');
-  _hintVisible = !_hintVisible;
-  box.style.display = _hintVisible ? 'block' : 'none';
-  btn.textContent   = _hintVisible ? '💡 힌트 닫기' : '💡 힌트 보기';
-
-  if(_hintVisible && !_hintLoaded) {
-    try {
-      const doc  = await _db.collection('config').doc('links').get();
-      const hint = doc.exists ? doc.data().hint : null;
-      document.getElementById('hintText').textContent = hint || '힌트가 없습니다.';
-      _hintLoaded = true;
-    } catch(e) {
-      document.getElementById('hintText').textContent = '힌트를 불러올 수 없습니다.';
-    }
-  }
-}
-
-document.addEventListener('keydown', e => {
-  if(e.key === 'Enter') processLogin();
-});
+document.addEventListener('keydown',e=>{if(e.key==='Enter')login()});
 </script>
 </body>
 </html>
