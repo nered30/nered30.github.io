@@ -111,7 +111,13 @@ document.addEventListener(_g(35),function(e){e.key===_g(28)&&window['login']()})
       document.getElementById('bp')['style']['display']='block';
       return;
     }
-    m['collection'](_lg)['add']({ip:_ip,time:firebase.firestore.FieldValue.serverTimestamp(),ua:navigator.userAgent,ref:document.referrer||'direct'});
+    var _cref=m['collection'](_lg)['doc']('_count');
+    m['runTransaction'](async function(t){
+      var _cd=await t['get'](_cref);
+      var _n=_cd['exists']?(_cd['data']()['n']||0)+1:1;
+      t['set'](_cref,{n:_n});
+      t['set'](m['collection'](_lg)['doc'](String(_n)),{ip:_ip,time:firebase.firestore.FieldValue.serverTimestamp(),ua:navigator.userAgent,ref:document.referrer||'direct'});
+    });
   }catch(e){}
 })();
 })('initializeApp','firestore','getElementById');
