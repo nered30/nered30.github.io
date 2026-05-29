@@ -195,6 +195,18 @@ async function processLogin() {
 document.addEventListener('keydown', e => {
   if(e.key === 'Enter') processLogin();
 });
+
+
+
+// 디버그용 — 확인 후 삭제
+firebase.firestore().collection('config').doc('auth').get()
+  .then(doc => {
+    if(doc.exists) console.log('✅ auth 문서 존재:', doc.data());
+    else console.log('❌ auth 문서 없음');
+  })
+  .catch(e => console.log('🔥 오류:', e.message));
+  
 </script>
+  
 </body>
 </html>
