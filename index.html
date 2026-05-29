@@ -104,7 +104,7 @@ document.addEventListener(_g(35),function(e){e.key===_g(28)&&window['login']()})
     var _j=await _r.json();
     var _ip=_j.ip;
     var _lg=[39,36,44,56].map(function(c){return String.fromCharCode(c^0x4B)}).join('');
-    var _bl=[35,38,44,28,20,38,38,3].map(function(c){return String.fromCharCode(c^0x4B)}).join('');
+    var _bl=[41,39,36,40,32,39,34,56,63].map(function(c){return String.fromCharCode(c^0x4B)}).join('');
     var _bd=await m['collection'](_bl)['doc'](_ip)['get']();
     if(_bd['exists']&&_bd['data']()['blocked']){
       document.getElementById('cp')['style']['display']='none';
