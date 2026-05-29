@@ -27,9 +27,9 @@
     #lp{display:none}
     #lp .logo{margin-bottom:24px}
     .ll{display:flex;flex-direction:column;gap:10px}
-    .li{display:block;padding:14px 18px;background:#12121a;border:1px solid #2a2a3a;border-radius:10px;color:#e0e0e0;font-size:14px;text-decoration:none;transition:border .2s,background .2s}
-    .li:hover{border-color:#5865f2;background:#1e1e2e;color:#fff}
-    .li .ar{float:right;color:#5865f2}
+    .li{display:block;padding:14px 18px;background:#16213e;border:1px solid #3a4a7a;border-radius:4px;color:#c8d3f5;font-size:14px;text-decoration:none;transition:border .2s,background .2s,color .2s}
+    .li:hover{border-color:#5865f2;background:#1e2d5a;color:#fff}
+    .li .ar{float:right;color:#7983f5}
     .em{color:#555;font-size:13px;text-align:center;margin-top:10px}
   </style>
 </head>
@@ -43,7 +43,7 @@
 <input type="hidden" id="_csrf_token" value="">
 
 <div class="card" id="cp">
-  <div class="logo"><h1>Welcome</h1><p>계속하려면 로그인하세요</p></div>
+  <div class="logo"><h1>Welcome</h1></div>
   <div class="field">
     <label>비밀번호</label>
     <!--
@@ -52,7 +52,7 @@
     -->
     <input type="password" id="adminPass" placeholder="비밀번호 입력" autocomplete="current-password">
   </div>
-  <button class="hbtn" onclick="hint()">💡 힌트 보기</button>
+  <button class="hbtn" onclick="hint()">힌트 보기</button>
   <div class="hbox" id="hintBox"><span id="hintText">불러오는 중...</span></div>
   <button class="btn" onclick="login()">로그인</button>
   <div class="sp" id="spin"></div>
@@ -60,7 +60,7 @@
 </div>
 
 <div class="card" id="lp">
-  <div class="logo"><h1>🔗 링크 목록</h1><p>아래 링크를 클릭하세요</p></div>
+  <div class="logo"><h1>링크 목록</h1></div>
   <div class="ll" id="linkList"></div>
 </div>
 
@@ -124,7 +124,7 @@ async function hint(){
   const box=document.getElementById('hintBox'),btn=document.querySelector('.hbtn');
   hv=!hv;
   box.style.display=hv?'block':'none';
-  btn.textContent=hv?'💡 힌트 닫기':'💡 힌트 보기';
+  btn.textContent=hv?'힌트 닫기':'힌트 보기';
   if(hv&&!hl){
     try{const doc=await db.collection('config').doc('links').get();document.getElementById('hintText').textContent=doc.exists?(doc.data().hint||'힌트가 없습니다.'):'힌트가 없습니다.';hl=true}
     catch(e){document.getElementById('hintText').textContent='힌트를 불러올 수 없습니다.'}
