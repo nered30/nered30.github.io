@@ -98,7 +98,7 @@ function fffRender(eff){
   if(!eff.length){efff[_g(34)]='<p class="'+_g(39)+'">결과 없음</p>';return}
   eff.forEach(function(o){var a=document.createElement('a');a.href='#';a.onclick=function(e){e.preventDefault();window.open(o['url'],'_blank')};a.className=_g(37);a[_g(34)]=o['text'];efff.appendChild(a)})
 }
-function fffSearch(q){
+window['fffSearch']=function(q){
   var r=_allLinks.filter(function(o){return o.text.toLowerCase().includes(q.toLowerCase())});
   fffRender(r);
 }
