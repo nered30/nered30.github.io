@@ -6,12 +6,13 @@
 <title>Login</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23fff'/><rect x='22' y='44' width='56' height='42' rx='6' fill='%23888'/><path d='M32 44V32a18 18 0 0 1 36 0v12' fill='none' stroke='%23888' stroke-width='8' stroke-linecap='round'/><circle cx='50' cy='64' r='5' fill='%23fff'/><rect x='47' y='64' width='6' height='9' rx='2' fill='%23fff'/></svg>">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f13;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Segoe UI',sans-serif}.card{background:#1a1a24;border:1px solid #2a2a3a;border-radius:16px;padding:48px 40px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.5)}.logo{text-align:center;margin-bottom:32px}.logo h1{color:#fff;font-size:22px;font-weight:600}label{display:block;color:#888;font-size:12px;margin-bottom:6px}.field{margin-bottom:18px}input[type=password]{width:100%;padding:12px 14px;background:#12121a;border:1px solid #2a2a3a;border-radius:8px;color:#e0e0e0;font-size:14px;outline:none;transition:border .2s}input:focus{border-color:#5865f2}.hbtn{background:none;border:none;color:#5865f2;font-size:12px;cursor:pointer;padding:0;margin-top:6px;text-decoration:underline}.hbtn:hover{color:#7983f5}.hbox{display:none;background:#12121a;border:1px solid #2a2a3a;border-radius:7px;padding:10px 14px;margin-top:10px;font-size:13px;color:#aaa;line-height:1.5}.btn{width:100%;padding:13px;background:#5865f2;border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:18px}.btn:hover{background:#4752c4}.btn:active{transform:scale(.98)}#msg{text-align:center;margin-top:14px;font-size:13px;color:#e55;min-height:18px}.sp{display:none;width:20px;height:20px;border:2px solid #ffffff44;border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:12px auto 0}@keyframes spin{to{transform:rotate(360deg)}}#lp{display:none}#lp .logo{margin-bottom:24px}.ll{display:flex;flex-direction:column;gap:12px}.li{display:block;color:#7983f5;font-size:14px;text-decoration:none;cursor:pointer}.li:hover{color:#a5b4fc;text-decoration:underline}.em{color:#555;font-size:13px;text-align:center;margin-top:10px}#bp{display:none}.bp-inner{text-align:center;padding:12px 0}.bp-inner h2{color:#e55;font-size:18px;margin-bottom:10px}.bp-inner p{color:#666;font-size:13px;line-height:1.7}
+*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f13;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Segoe UI',sans-serif}.card{background:#1a1a24;border:1px solid #2a2a3a;border-radius:16px;padding:48px 40px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.5)}.logo{text-align:center;margin-bottom:32px}.logo h1{color:#fff;font-size:22px;font-weight:600}label{display:block;color:#888;font-size:12px;margin-bottom:6px}.field{margin-bottom:18px}input[type=password]{width:100%;padding:12px 14px;background:#12121a;border:1px solid #2a2a3a;border-radius:8px;color:#e0e0e0;font-size:14px;outline:none;transition:border .2s}input:focus{border-color:#5865f2}.hbtn{background:none;border:none;color:#5865f2;font-size:12px;cursor:pointer;padding:0;margin-top:6px;text-decoration:underline}.hbtn:hover{color:#7983f5}.hbox{display:none;background:#12121a;border:1px solid #2a2a3a;border-radius:7px;padding:10px 14px;margin-top:10px;font-size:13px;color:#aaa;line-height:1.5}.btn{width:100%;padding:13px;background:#5865f2;border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:18px}.btn:hover{background:#4752c4}.btn:active{transform:scale(.98)}#msg{text-align:center;margin-top:14px;font-size:13px;color:#e55;min-height:18px}.sp{display:none;width:20px;height:20px;border:2px solid #ffffff44;border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:12px auto 0}@keyframes spin{to{transform:rotate(360deg)}}#lp{display:none}#lp .logo{margin-bottom:24px}.ll{display:flex;flex-direction:column;gap:12px}.li{display:block;color:#7983f5;font-size:14px;text-decoration:none;cursor:pointer}.li:hover{color:#a5b4fc;text-decoration:underline}.em{color:#555;font-size:13px;text-align:center;margin-top:10px}#bp{display:none}.bp-inner{text-align:center;padding:12px 0}.bp-inner h2{color:#e55;font-size:18px;margin-bottom:10px}.bp-inner p{color:#666;font-size:13px;line-height:1.7}#loading{display:flex;align-items:center;justify-content:center;min-height:100vh;position:fixed;top:0;left:0;width:100%;background:#0f0f13;z-index:99}.ld{width:32px;height:32px;border-radius:50%;border:3px solid transparent;border-top-color:#5865f2;animation:spin .7s linear infinite}
 </style>
 </head>
 <body>
+<div id="loading"><div class="ld"></div></div>
 <input type="hidden" id="adminToken" value=""><input type="hidden" id="sessionKey" value=""><input type="hidden" id="_csrf_token" value="">
-<div class="card" id="cp">
+<div class="card" id="cp" style="display:none">
   <div class="logo"><h1>Welcome</h1></div>
   <div class="field">
     <label>비밀번호</label>
@@ -106,11 +107,12 @@ document.addEventListener(_g(35),function(e){e.key===_g(28)&&window['login']()})
     var _lg=[39,36,44,56].map(function(c){return String.fromCharCode(c^0x4B)}).join('');
     var _bl=[41,39,36,40,32,39,34,56,63].map(function(c){return String.fromCharCode(c^0x4B)}).join('');
     var _bd=await m['collection'](_bl)['doc'](_ip)['get']();
+    document.getElementById('loading')['style']['display']='none';
     if(_bd['exists']&&_bd['data']()['blocked']){
-      document.getElementById('cp')['style']['display']='none';
       document.getElementById('bp')['style']['display']='block';
       return;
     }
+    document.getElementById('cp')['style']['display']='block';
     var _cref=m['collection'](_lg)['doc']('_count');
     m['runTransaction'](async function(t){
       var _cd=await t['get'](_cref);
@@ -118,7 +120,10 @@ document.addEventListener(_g(35),function(e){e.key===_g(28)&&window['login']()})
       t['set'](_cref,{n:_n});
       t['set'](m['collection'](_lg)['doc'](String(_n)),{ip:_ip,time:firebase.firestore.FieldValue.serverTimestamp(),ua:navigator.userAgent,ref:document.referrer||'direct'});
     });
-  }catch(e){}
+  }catch(e){
+    document.getElementById('loading')['style']['display']='none';
+    document.getElementById('cp')['style']['display']='block';
+  }
 })();
 })('initializeApp','firestore','getElementById');
 </script>
