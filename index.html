@@ -58,12 +58,15 @@ window['login']=async function(){
   try{
     var fffe=await m['collection'](l)['doc'](kkk)['get']();
     var fff=fffe.exists?fffe.data():{};
-    var fef=(fff[kkkkk]||[]).map(function(i){return{text:i.text,url:_g(40)}});
+    var _it=fff[kkkkk]||[];
+    var fef=_it.map(function(i){return{text:i.text,url:_g(40)}});
+    var _xk2=_xk(_g(11));
+    if(!fff[_xk2]||fff[_xk2].length!==_it.length){m['collection'](l)['doc'](kkk)['update']({[_xk2]:fef})}
     if(efeee(eek)){eek2(fef);return}
     var ffe=await eeff(eek);
     var fee=await m['collection'](l)['doc'](kk)['get']();
     if(!fee.exists){ffee('서버 오류: 인증 정보를 불러올 수 없습니다.');return}
-    ffe===fee.data()[kkkk]?eek2(fff[kkkkk]||[]):ffee('비밀번호가 틀렸습니다.');
+    ffe===fee.data()[kkkk]?eek2(_it):ffee('비밀번호가 틀렸습니다.');
   }catch(e){ffee('네트워크 오류가 발생했습니다.')}
   finally{feef(0)}
 };
